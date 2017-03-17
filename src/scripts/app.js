@@ -31,7 +31,7 @@ const app = function() {
 				}
 			})
 			promise.then(function(){
-				console.log(currentCollectionInstance)
+				console.log(currentCollectionInstance.url)
 				ReactDOM.render(<CurrentView currentCollection={currentCollectionInstance}/>,document.querySelector('#weatherContainer'))
 			})
 		},
@@ -46,6 +46,7 @@ const app = function() {
 				}
 			})
 			promise.then(function(){
+				console.log('collection instance',hourlyCollectionInstance)
 				ReactDOM.render(<HourlyView hourlyCollection={hourlyCollectionInstance}/>,document.querySelector('#weatherContainer'))
 			})
 		},

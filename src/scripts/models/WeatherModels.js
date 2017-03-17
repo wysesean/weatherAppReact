@@ -19,7 +19,7 @@ var HourlyCollection = Backbone.Collection.extend({
 		this.url = fullURL
 	},
 	parse: function(apiResponse){
-		return apiResponse.hourly
+		return apiResponse.hourly.data
 	}
 })
 

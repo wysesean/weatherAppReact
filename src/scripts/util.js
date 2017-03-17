@@ -44,4 +44,14 @@ function secondsToTime(num){
 	return date.toString()
 }
 
-export {translateIcon, toTitleCase, secondsToTime}
+function formatTime(str){
+	var strArr = str.split(' ')
+	return strArr[4]
+}
+
+function formatDate(str){
+	var strArr = str.split(' ')
+	return strArr[0]
+}
+
+export {translateIcon, toTitleCase, secondsToTime, formatTime, formatDate}
