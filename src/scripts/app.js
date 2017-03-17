@@ -8,6 +8,7 @@ import Backbone from 'backbone'
 import init from './init'
 import util from './util'
 import {CurrentModel, HourlyCollection, DailyCollection} from './models/WeatherModels'
+import {CurrentView, HourlyView, DailyView} from './views/WeatherViews'
 import LeftSideBar from './views/leftSideBar'
 
 const app = function() {
@@ -30,6 +31,7 @@ const app = function() {
 				}
 			})
 			promise.then(function(){
+				console.log(currentCollectionInstance)
 				ReactDOM.render(<CurrentView currentCollection={currentCollectionInstance}/>,document.querySelector('#weatherContainer'))
 			})
 		},

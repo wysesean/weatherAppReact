@@ -43,3 +43,5 @@ function secondsToTime(num){
 	date.setSeconds(num)
 	return date.toString()
 }
+
+export {translateIcon, toTitleCase, secondsToTime}
