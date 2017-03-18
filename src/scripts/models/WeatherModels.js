@@ -1,11 +1,12 @@
 import Backbone from 'backbone'
-import {config} from '../../../config/secrets'
+import config from '../../../config/secrets'
 var darkSkyKey = config.DARK_SKY_KEY,
 	flickrKey = config.FLICKR_KEY
 
 var CurrentModel = Backbone.Model.extend({
 	_generateURL: function(lat,lng){
 		var fullURL= 'https://api.darksky.net/forecast/'+darkSkyKey+'/'+lat+','+lng
+		console.log(fullURL)
 		this.url = fullURL
 	},
 	parse: function(apiResponse){
@@ -29,7 +30,7 @@ var DailyCollection = Backbone.Collection.extend({
 		this.url = fullURL
 	},
 	parse: function(apiResponse){
-		return apiResponse.daily
+		return apiResponse.daily.data
 	}
 })
 

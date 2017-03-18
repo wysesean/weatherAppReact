@@ -10,6 +10,8 @@ import util from './util'
 import {CurrentModel, HourlyCollection, DailyCollection} from './models/WeatherModels'
 import {CurrentView, HourlyView, DailyView} from './views/WeatherViews'
 import LeftSideBar from './views/leftSideBar'
+import LoadingIcon from './views/loadingicon'
+
 
 const app = function() {
 	var WeatherRouter = Backbone.Router.extend({
@@ -30,6 +32,8 @@ const app = function() {
 					'callback':'?'
 				}
 			})
+			//Render the loading icon then overwrite loading icon once promise fufills
+			ReactDOM.render(<LoadingIcon />, document.querySelector('#weatherContainer'))
 			promise.then(function(){
 				console.log(currentCollectionInstance.url)
 				ReactDOM.render(<CurrentView currentCollection={currentCollectionInstance}/>,document.querySelector('#weatherContainer'))
@@ -45,6 +49,8 @@ const app = function() {
 					'callback':'?'
 				}
 			})
+			//Render the loading icon then overwrite loading icon once promise fufills
+			ReactDOM.render(<LoadingIcon />, document.querySelector('#weatherContainer'))
 			promise.then(function(){
 				console.log('collection instance',hourlyCollectionInstance)
 				ReactDOM.render(<HourlyView hourlyCollection={hourlyCollectionInstance}/>,document.querySelector('#weatherContainer'))
@@ -60,6 +66,8 @@ const app = function() {
 					'callback':'?'
 				}
 			})
+			//Render the loading icon then overwrite loading icon once promise fufills
+			ReactDOM.render(<LoadingIcon />, document.querySelector('#weatherContainer'))
 			promise.then(function(){
 				ReactDOM.render(<DailyView dailyCollection={dailyCollectionInstance}/>,document.querySelector('#weatherContainer'))
 			})
@@ -74,10 +82,12 @@ const app = function() {
 				var lat = positionObj.coords.latitude,
 					long = positionObj.coords.longitude
 				location.hash = lat + '/' + long + '/current'
+				//TO DO Render City Name
+				//TO DO Render background image
 			})
 		}
 	})
-	ReactDOM.render(<LeftSideBar />, document.querySelector('#leftSideBar'))
+	ReactDOM.render(<LeftSideBar />, document.querySelector('#rightColumn'))
 	//To do
 	//getInitialValues()
 	new WeatherRouter()

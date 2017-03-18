@@ -3,7 +3,6 @@ import {translateIcon, toTitleCase, secondsToTime, formatTime, formatDate} from 
 
 var CurrentView = React.createClass({
 	render:function(){
-		console.log(this)
 		return(
 		 	<div id="currentContainer">
 				<h1 id="currentTemp">{Math.round(this.props.currentCollection.get('temperature'))} &#8457;</h1>
@@ -20,18 +19,19 @@ var CurrentView = React.createClass({
 
 var HourlyView = React.createClass({
 	_makeElements: function(singleElement){
-		console.log(singleElement)
 		return(
-			<div className='hourlyElement'>
-				<p id="hourlyTime">'+{formatTime(secondsToTime(singleElement.attributes['time']))}
-				{Math.round(singleElement.attributes['temperature'])}&#8457;<i className={translateIcon(singleElement.attributes['icon'])}></i></p>
+			<div className='hourlyElement' key={singleElement.attributes.time}>
+				<p id="hourlyTime">
+					<i className={translateIcon(singleElement.attributes['icon'])}></i>&nbsp; &nbsp;
+					{formatTime(secondsToTime(singleElement.attributes['time']))} &nbsp; - &nbsp;
+					{Math.round(singleElement.attributes['temperature'])}&#8457; &nbsp; 
+				</p>
 				<hr />
 			</div>
 
 		)
 	},
 	render:function(){
-		console.log('hourly view',this)
 		return(
 			<div id="hourlyContainer">
 				{this.props.hourlyCollection.models.slice(0,12).map(this._makeElements)}
@@ -41,10 +41,25 @@ var HourlyView = React.createClass({
 })
 
 var DailyView = React.createClass({
+	_makeElements: function(singleElement){
+		console.log(singleElement)
+		return(
+			<div key={singleElement.attributes.time} className="dailyElement">
+				<p id="dailyDay">
+					<i className={translateIcon(singleElement.attributes['icon'])}></i>&nbsp; &nbsp;
+					{formatDate(secondsToTime(singleElement.attributes['time']))}&nbsp;:&nbsp;
+					{Math.round(singleElement.attributes['temperatureMax'])}&#8457; / &nbsp;
+					{Math.round(singleElement.attributes['temperatureMin'])}&#8457; &nbsp; &#13;
+				</p>
+				<div><p id="dailyDay">{singleElement.attributes['summary']}</p></div>
+				<hr/>
+			</div>
+		)
+	},
 	render:function(){
 		return(
-			<div>
-				<p> sup dude </p>
+			<div className="dailyContainer">
+				{this.props.dailyCollection.models.slice(0,7).map(this._makeElements)}
 			</div>
 		)
 	}

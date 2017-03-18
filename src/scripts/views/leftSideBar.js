@@ -1,18 +1,30 @@
 import React from 'react'
-import LoadingIcon from './loadingicon'
 var LeftSideBar = React.createClass({
+	_handleCurrentClick:function(){
+		var hashArr = location.hash.split('/')
+		location.hash = hashArr[0]+'/'+hashArr[1]+'/current'
+
+	},
+	_handleHourlyClick:function(){
+		var hashArr = location.hash.split('/')
+		location.hash = hashArr[0]+'/'+hashArr[1]+'/hourly'
+
+	},
+	_handleDailyClick:function(){
+		var hashArr = location.hash.split('/')
+		location.hash = hashArr[0]+'/'+hashArr[1]+'/daily'
+	},
 	render:function(){
 		return (
 			<div className='left-side-bar'>
 				<div id="interactStuff">
 					<input id="inputText" type="text" name="search" placeholder="Search..." />
 					<div id="weatherButtons">
-						<button className="weatherButton" id="currentLink">Current</button>
-						<button className="weatherButton"  id="hourlyLink">Hourly</button>
-						<button className="weatherButton"  id="dailyLink">Daily</button>
+						<input type='button' onClick={this._handleCurrentClick} className="weatherButton" id="currentLink" value='Current' />
+						<input type='button' onClick={this._handleHourlyClick} className="weatherButton"  id="hourlyLink" value='Hourly' />
+						<input type='button' onClick={this._handleDailyClick} className="weatherButton"  id="dailyLink" value='Daily' />
 					</div>
 				</div>
-				<LoadingIcon />
 				<div id="weatherContainer"></div>
 				<div id="cityName">
 				</div>

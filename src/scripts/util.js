@@ -46,7 +46,7 @@ function secondsToTime(num){
 
 function formatTime(str){
 	var strArr = str.split(' ')
-	return strArr[4]
+	return strArr[4].split(':').slice(0,2).join(':')
 }
 
 function formatDate(str){
