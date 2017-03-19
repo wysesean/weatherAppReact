@@ -54,4 +54,9 @@ function formatDate(str){
 	return strArr[0]
 }
 
-export {translateIcon, toTitleCase, secondsToTime, formatTime, formatDate}
+function formatCityName(str){
+	var strArr = str.split(',')
+	return strArr[0]
+}
+
+export {translateIcon, toTitleCase, secondsToTime, formatTime, formatDate, formatCityName}

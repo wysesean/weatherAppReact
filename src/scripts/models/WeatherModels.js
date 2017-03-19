@@ -6,7 +6,6 @@ var darkSkyKey = config.DARK_SKY_KEY,
 var CurrentModel = Backbone.Model.extend({
 	_generateURL: function(lat,lng){
 		var fullURL= 'https://api.darksky.net/forecast/'+darkSkyKey+'/'+lat+','+lng
-		console.log(fullURL)
 		this.url = fullURL
 	},
 	parse: function(apiResponse){

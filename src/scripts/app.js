@@ -11,6 +11,7 @@ import {CurrentModel, HourlyCollection, DailyCollection} from './models/WeatherM
 import {CurrentView, HourlyView, DailyView} from './views/WeatherViews'
 import LeftSideBar from './views/leftSideBar'
 import LoadingIcon from './views/loadingicon'
+import CityName from './views/cityName'
 
 
 const app = function() {
@@ -34,8 +35,8 @@ const app = function() {
 			})
 			//Render the loading icon then overwrite loading icon once promise fufills
 			ReactDOM.render(<LoadingIcon />, document.querySelector('#weatherContainer'))
+
 			promise.then(function(){
-				console.log(currentCollectionInstance.url)
 				ReactDOM.render(<CurrentView currentCollection={currentCollectionInstance}/>,document.querySelector('#weatherContainer'))
 			})
 		},
@@ -52,7 +53,7 @@ const app = function() {
 			//Render the loading icon then overwrite loading icon once promise fufills
 			ReactDOM.render(<LoadingIcon />, document.querySelector('#weatherContainer'))
 			promise.then(function(){
-				console.log('collection instance',hourlyCollectionInstance)
+
 				ReactDOM.render(<HourlyView hourlyCollection={hourlyCollectionInstance}/>,document.querySelector('#weatherContainer'))
 			})
 		},
@@ -69,6 +70,7 @@ const app = function() {
 			//Render the loading icon then overwrite loading icon once promise fufills
 			ReactDOM.render(<LoadingIcon />, document.querySelector('#weatherContainer'))
 			promise.then(function(){
+
 				ReactDOM.render(<DailyView dailyCollection={dailyCollectionInstance}/>,document.querySelector('#weatherContainer'))
 			})
 		},
@@ -82,14 +84,25 @@ const app = function() {
 				var lat = positionObj.coords.latitude,
 					long = positionObj.coords.longitude
 				location.hash = lat + '/' + long + '/current'
-				//TO DO Render City Name
+
+				// ReactDOM.render(<CityName />, document.querySelector('#cityName'))
+				// ReactDOM.render(<BackgroundImg />, document.querySelector('#imgContainer'))
 				//TO DO Render background image
+				ReactDOM.render(<LeftSideBar />, document.querySelector('#rightColumn'))
+				ReactDOM.render(<CityName />, document.querySelector('#cityName'))
+
 			})
 		}
 	})
 	ReactDOM.render(<LeftSideBar />, document.querySelector('#rightColumn'))
-	//To do
-	//getInitialValues()
+	ReactDOM.render(<LoadingIcon />, document.querySelector('#weatherContainer'))
+	ReactDOM.render(<CityName />, document.querySelector('#cityName'))
+
+	// if(location.hash !== ''){
+	// 	// ReactDOM.render(<BackgroundImg />, document.querySelector('#imgContainer'))
+	// 	ReactDOM.render(<CityName />, document.querySelector('#cityName'))
+	// }
+
 	new WeatherRouter()
 	Backbone.history.start()
 }

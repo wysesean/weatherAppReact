@@ -42,7 +42,6 @@ var HourlyView = React.createClass({
 
 var DailyView = React.createClass({
 	_makeElements: function(singleElement){
-		console.log(singleElement)
 		return(
 			<div key={singleElement.attributes.time} className="dailyElement">
 				<p id="dailyDay">
