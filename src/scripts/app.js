@@ -80,6 +80,7 @@ const app = function() {
 		},
 		handleDefault: function(){
 			//If empty hash, change the hash to the current geolocation
+			console.log('handleDefault')
 			navigator.geolocation.getCurrentPosition((positionObj)=>{
 				var lat = positionObj.coords.latitude,
 					long = positionObj.coords.longitude
@@ -88,15 +89,17 @@ const app = function() {
 				// ReactDOM.render(<CityName />, document.querySelector('#cityName'))
 				// ReactDOM.render(<BackgroundImg />, document.querySelector('#imgContainer'))
 				//TO DO Render background image
-				ReactDOM.render(<LeftSideBar />, document.querySelector('#rightColumn'))
-				ReactDOM.render(<CityName />, document.querySelector('#cityName'))
-
+				ReactDOM.render(<LeftSideBar defaultCoords={lat+','+long}/>, document.querySelector('#rightColumn'))
+				ReactDOM.render(<LoadingIcon />, document.querySelector('#weatherContainer'))
 			})
 		}
 	})
-	ReactDOM.render(<LeftSideBar />, document.querySelector('#rightColumn'))
-	ReactDOM.render(<LoadingIcon />, document.querySelector('#weatherContainer'))
-	ReactDOM.render(<CityName />, document.querySelector('#cityName'))
+	console.log('first render')
+	if(location.hash){
+		ReactDOM.render(<LeftSideBar />, document.querySelector('#rightColumn'))
+		ReactDOM.render(<LoadingIcon />, document.querySelector('#weatherContainer'))
+	}
+
 
 	// if(location.hash !== ''){
 	// 	// ReactDOM.render(<BackgroundImg />, document.querySelector('#imgContainer'))

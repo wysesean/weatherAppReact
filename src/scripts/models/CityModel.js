@@ -2,7 +2,6 @@ import Backbone from 'backbone'
 import config from '../../../config/secrets'
 import {formatCityName} from '../util'
 
-var flickrKey = config.FLICKR_KEY
 
 var CityModel = Backbone.Model.extend({
 	url:'https://maps.googleapis.com/maps/api/geocode/json?',
@@ -32,10 +31,6 @@ var SearchCityModel = Backbone.Model.extend({
 	}
 })
 
-var FlickrCollection = Backbone.Collection.extend({
-	parse: function(apiResponse){
-		return apiResponse
-	}
-})
+
 
 export {CityModel, SearchCityModel}

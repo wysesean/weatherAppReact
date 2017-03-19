@@ -1,6 +1,7 @@
 import React from 'react'
 import {CityModel, SearchCityModel} from '../models/CityModel'
 import ReactDOM from 'react-dom'
+import CityName from './cityName'
 
 var LeftSideBar = React.createClass({
 	_handleCurrentClick:function(){
@@ -36,8 +37,7 @@ var LeftSideBar = React.createClass({
 				hashArr[1] = apiResponse.results[0].geometry.location['lng']
 				location.hash = hashArr.join('/')
 				this.setState({
-					lat:hashArr[0],
-					long:hashArr[1]
+					latlng: hashArr[0]+','+hashArr[1]
 				})
 
 			})
@@ -48,16 +48,16 @@ var LeftSideBar = React.createClass({
 	getInitialState: function(){
 		var hashArr = location.hash.substr(1).split('/')
 		return {
-			lat:hashArr[0],
-			long:hashArr[1],
-			cityName: ''
+			latlng: hashArr[0]+','+hashArr[1]
 		}
 	},
-	componentWillMount: function(){
+	componentDidMount:function(){
+		var hashArr = location.hash.substr(1).split('/')
 		this.setState({
-			cityName: ''
+			latlng: hashArr[0]+','+hashArr[1]
 		})
 	},
+
 	render:function(){
 		return (
 			<div className='left-side-bar'>
@@ -70,7 +70,7 @@ var LeftSideBar = React.createClass({
 					</div>
 				</div>
 				<div id="weatherContainer"></div>
-				<div id='cityName'></div>
+				<CityName coords={this.state.latlng} defaultCoords={this.props.defaultCoords}/>
 			</div>
 		)
 	}
